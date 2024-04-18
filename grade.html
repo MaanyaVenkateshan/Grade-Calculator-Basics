@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grade Calculator</title>
+</head>
+<body>
+<h2>Grade Calculator</h2>
+<form id="gradeForm" onsubmit="return calculateGrade(event)">
+    <label for="digitalAssignment">Digital Assignment (10 marks):</label>
+    <input type="number" id="digitalAssignment" name="digitalAssignment" min="0" max="10" required><br><br>
+    <label for="quiz1">Quiz 1 (10 marks):</label>
+    <input type="number" id="quiz1" name="quiz1" min="0" max="10" required><br><br>
+    <label for="quiz2">Quiz 2 (10 marks):</label>
+    <input type="number" id="quiz2" name="quiz2" min="0" max="10" required><br><br>
+    <label for="continuousAssessment1">Continuous Assessment 1 (15 marks):</label>
+    <input type="number" id="continuousAssessment1" name="continuousAssessment1" min="0" max="15" required><br><br>
+    <label for="continuousAssessment2">Continuous Assessment 2 (15 marks):</label>
+    <input type="number" id="continuousAssessment2" name="continuousAssessment2" min="0" max="15" required><br><br>
+    <label for="finalAssessment">Final Assessment (40 marks):</label>
+    <input type="number" id="finalAssessment" name="finalAssessment" min="0" max="40" required><br><br>
+    <button type="submit">Calculate Grade</button>
+</form>
+<p id="gradeResult"></p>
+<script>
+function calculateGrade(event) {
+    event.preventDefault(); // Prevent form submission to allow custom processing
+
+    // Retrieve input values
+    var digitalAssignment = parseInt(document.getElementById("digitalAssignment").value) || 0;
+    var quiz1 = parseInt(document.getElementById("quiz1").value) || 0;
+    var quiz2 = parseInt(document.getElementById("quiz2").value) || 0;
+    var continuousAssessment1 = parseInt(document.getElementById("continuousAssessment1").value) || 0;
+    var continuousAssessment2 = parseInt(document.getElementById("continuousAssessment2").value) || 0;
+    var finalAssessment = parseInt(document.getElementById("finalAssessment").value) || 0;
+
+    // Calculate total marks
+    var totalMarks = digitalAssignment + quiz1 + quiz2 + continuousAssessment1 + continuousAssessment2 + finalAssessment;
+
+    // Determine grade based on total marks
+    var grade;
+    if (totalMarks >= 90) {
+        grade = "S";
+    } else if (totalMarks >= 80) {
+        grade = "A";
+    } else if (totalMarks >= 70) {
+        grade = "B";
+    } else if (totalMarks >= 60) {
+        grade = "C";
+    } else if (totalMarks >= 55) {
+        grade = "D";
+    } else if (totalMarks >= 50) {
+        grade = "E";
+    } else {
+        grade = "F";
+    }
+
+    // Display result
+    document.getElementById("gradeResult").innerHTML = "Total Marks: " + totalMarks + "<br>Grade: " + grade;
+
+    return false; // Prevent the form from actually submitting
+}
+</script>
+</body>
+</html>
